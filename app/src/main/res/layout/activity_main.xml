@@ -40,14 +40,14 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/btnSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="22dp"
+                android:layout_height="29dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                app:srcCompat="@android:drawable/ic_menu_search" />
+                app:srcCompat="@drawable/loupe" />
 
             <EditText
                 android:id="@+id/etCity"
