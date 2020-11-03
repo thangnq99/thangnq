@@ -40,17 +40,17 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/btnSearch"
-                android:layout_width="22dp"
-                android:layout_height="29dp"
+                android:layout_width="7dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                app:srcCompat="@drawable/loupe" />
+                app:srcCompat="@android:drawable/ic_menu_search" />
 
             <EditText
-                android:id="@+id/etCity"
+                android:id="@+id/etSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -58,12 +58,12 @@
                 android:backgroundTint="#FFFFFF"
                 android:ems="10"
                 android:focusedByDefault="false"
+                android:gravity="start"
                 android:hint="Hanoi"
                 android:inputType="textPersonName"
                 android:textAlignment="viewStart"
                 android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:gravity="start" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -149,7 +149,7 @@
     <LinearLayout
         android:id="@+id/detailContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:layout_below="@+id/statusContainer"
         android:layout_marginTop="20dp"
         android:background="#4DD7D7D7"
@@ -163,7 +163,7 @@
 
             <TextView
                 android:id="@+id/txtDate"
-                android:layout_width="wrap_content"
+                android:layout_width="61dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
@@ -197,19 +197,19 @@
         <LinearLayout
             android:id="@+id/descriptionContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="94dp"
             android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/weatherIcon"
-                android:layout_width="300dp"
-                android:layout_height="70dp"
+                android:layout_width="233dp"
+                android:layout_height="67dp"
                 android:layout_weight="1" />
 
             <LinearLayout
                 android:id="@+id/desDetail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="411dp"
+                android:layout_height="66dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -277,7 +277,8 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="sadsad" />
             </LinearLayout>
 
             <Space
@@ -312,7 +313,8 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="sadsd" />
             </LinearLayout>
 
             <Space
