@@ -4,13 +4,16 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -23,7 +26,8 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-     String API = "5f0e7bb0ea868b77d281b07c046f565c";
+//     String API = "5f0e7bb0ea868b77d281b07c046f565c";
+    String API = "53fbf527d52d4d773e828243b90c1f8e";
      String city = "Hanoi";
      TextView address, status, recentTemp, tempMax, tempMin, date, description, sunSet, sunRise,
                     windSpeed, pressure, humidity, feelsLike;
@@ -32,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
      ImageButton btnSearch;
      EditText etSearch;
      View mainView;
+     Button btDayOnWeek;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +88,17 @@ public class MainActivity extends AppCompatActivity {
                 city = String.valueOf(etSearch.getText());
                 new weatherTask().execute();
                 mainView.requestFocus();
+            }
+        });
+
+        btDayOnWeek = findViewById(R.id.btDayOneWeek);
+        btDayOnWeek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,DayOneWeek.class);
+                city = etSearch.getText().toString();
+                intent.putExtra("Name",city);
+                startActivity(intent);
             }
         });
     }
