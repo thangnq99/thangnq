@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Project_WeatherForecast</string>
+    <string name="etSearch">Hanoi</string>
+    <string name="txtDate">Date</string>
+    <string name="txtToday">TODAY</string>
+    <string name="textView7">Description:</string>
+    <string name="textView12">Sunrise</string>
+    <string name="textView14">Sunset</string>
+    <string name="textView16">Pressure</string>
+    <string name="textView18">Wind</string>
+    <string name="textView20">Humidity</string>
+    <string name="textView22">Feels Like</string>
+    <string name="Humidity">Humidity</string>
+    <string name="hint">Enter city</string>
+    <string name="desc"></string>
 </resources>
