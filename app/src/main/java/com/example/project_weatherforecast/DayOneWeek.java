@@ -1,9 +1,5 @@
 package com.example.project_weatherforecast;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.VoiceInteractor;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
@@ -11,8 +7,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -36,20 +36,26 @@ public class DayOneWeek extends AppCompatActivity {
     ListView listView;
     CustomAdapter customAdapter;
     ArrayList<Custom> arrayWeather;
+    String icon2 = "01d";
+    LinearLayout linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day_one_week);
+        linearLayout = findViewById(R.id.lLayout);
         Mapping();
         Intent intent = getIntent();
         String city = intent.getStringExtra("Name");
+        icon2 = intent.getStringExtra("Icon");
         Log.d("KetQua","Du lieu chuyen qua" + city);
         if(city.equals("")) {
             City = "Hanoi";
             GetDayOnWeek(City);
+            setImage(icon2);
         }else {
             City = city;
             GetDayOnWeek(City);
+            setImage(icon2);
         }
         imageBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +96,7 @@ public class DayOneWeek extends AppCompatActivity {
                                 long l = Long.valueOf(day);
                                 Date date = new Date(l*1000L);
 //                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy-MM-dd");
-                                String Day = new SimpleDateFormat("EEEE yyyy-MM-dd", Locale.ENGLISH).format(date);
+                                String Day = new SimpleDateFormat("E yyyy-MM-dd", Locale.ENGLISH).format(date);
 
                                 JSONObject jsonObjectTemp = jsonObjectList.getJSONObject("temp");
                                 String max = jsonObjectTemp.getString("max");
@@ -109,6 +115,7 @@ public class DayOneWeek extends AppCompatActivity {
                                 arrayWeather.add(new Custom(Day,status,icon,MaxC,MinC));
                             }
                             customAdapter.notifyDataSetChanged();
+
                         }catch (JSONException e) {
 
                         }
@@ -121,5 +128,83 @@ public class DayOneWeek extends AppCompatActivity {
             }
         });
         requestQueue.add(stringRequest);
+    }
+    private void setImage(final String value){
+                switch (value){
+                    case "01d":
+
+                        linearLayout.setBackgroundResource(R.drawable.cloudday);
+                        break;
+                    case "01n":
+
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
+                        linearLayout.setBackgroundResource(R.drawable.cloudnight);
+                        break;
+                    case "02d":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudday));
+                        linearLayout.setBackgroundResource(R.drawable.cloudday);
+
+                        break;
+                    case "02n":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
+                        linearLayout.setBackgroundResource(R.drawable.cloudnight);
+                        break;
+                    case "03d":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.scatteredcloud));
+                        linearLayout.setBackgroundResource(R.drawable.scatteredcloud);
+                        break;
+                    case "03n":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
+                        linearLayout.setBackgroundResource(R.drawable.cloudnight);
+                        break;
+                    case "04d":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.brokenclouds));
+                        linearLayout.setBackgroundResource(R.drawable.brokenclouds);
+                        break;
+                    case "04n":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
+                        linearLayout.setBackgroundResource(R.drawable.cloudnight);
+                        break;
+                    case "09d":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.showerrain));
+                        linearLayout.setBackgroundResource(R.drawable.showerrain);
+                        break;
+                    case "09n":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.showerrain));
+                        linearLayout.setBackgroundResource(R.drawable.showerrain);
+                        break;
+                    case "10d":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.rainday));
+                        linearLayout.setBackgroundResource(R.drawable.rainday);
+                        break;
+                    case "10n":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.rainnight));
+                        linearLayout.setBackgroundResource(R.drawable.rainnight);
+                        break;
+                    case "11d":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.thunderstorm));
+                        linearLayout.setBackgroundResource(R.drawable.thunderstorm);
+                        break;
+                    case "11n":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.thunderstorm));
+                        linearLayout.setBackgroundResource(R.drawable.thunderstorm);
+                        break;
+                    case "13d":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.snowday));
+                        linearLayout.setBackgroundResource(R.drawable.snowday);
+                        break;
+                    case "13n":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.snownight));
+                        linearLayout.setBackgroundResource(R.drawable.snownight);
+                        break;
+                    case "50d":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.mistday));
+                        linearLayout.setBackgroundResource(R.drawable.mistday);
+                        break;
+                    case "50n":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.mistnight));
+                        linearLayout.setBackgroundResource(R.drawable.mistnight);
+                        break;
+                }
     }
 }

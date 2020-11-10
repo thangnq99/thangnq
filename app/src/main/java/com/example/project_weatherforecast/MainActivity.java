@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
      EditText etSearch;
      View mainView;
      Button btDayOnWeek;
-
+     String icons;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this,DayOneWeek.class);
                 city = etSearch.getText().toString();
                 intent.putExtra("Name",city);
+                intent.putExtra("Icon",icons);
                 startActivity(intent);
             }
         });
@@ -125,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String txtDate = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).format(new Date(jsonObject.getLong("dt") * 1000)) +"";
                 String icon = weather.getString("icon");
+                icons = icon;
                 setImage(image, icon);
 
                 NumberFormat numberFormat = NumberFormat.getNumberInstance();
