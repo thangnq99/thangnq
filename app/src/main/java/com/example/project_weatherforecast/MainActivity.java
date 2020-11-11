@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.inputmethodservice.Keyboard;
@@ -12,10 +13,13 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -48,7 +52,8 @@ import java.lang.reflect.Type;
 
 public class MainActivity extends AppCompatActivity {
 
-     String API = "5f0e7bb0ea868b77d281b07c046f565c";
+//     String API = "5f0e7bb0ea868b77d281b07c046f565c";
+    String API = "53fbf527d52d4d773e828243b90c1f8e";
      String city = "Hanoi";
      TextView address, status, recentTemp, tempMax, tempMin, date, description, sunSet, sunRise,
                     windSpeed, pressure, humidity, feelsLike;
@@ -57,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
      ImageButton btnSearch;
      AutoCompleteTextView etSearch;
      View mainView;
+     Button btDayOnWeek;
+     String icons;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,7 +144,17 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
+       btDayOnWeek = findViewById(R.id.btDayOneWeek);
+        btDayOnWeek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,DayOneWeek.class);
+                city = etSearch.getText().toString();
+                intent.putExtra("Name",city);
+                intent.putExtra("Icon",icons);
+                startActivity(intent);
+            }
+        });
     }
 
     public static void hideKeyboard(Activity activity) {
@@ -205,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String txtDate = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).format(new Date(jsonObject.getLong("dt") * 1000)) +"";
                 String icon = weather.getString("icon");
+                icons = icon;
                 setImage(image, icon);
 
                 NumberFormat numberFormat = NumberFormat.getNumberInstance();
