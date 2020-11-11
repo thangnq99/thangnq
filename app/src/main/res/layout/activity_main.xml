@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:focusable="true"
+    android:layout_height="wrap_content"
     android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true">
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".MainActivity">
 
     <View
         android:id="@+id/mainView"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_alignParentLeft="true" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/searchContainer"
@@ -27,7 +27,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:elevation="4dp"
+        app:elevation="4dp"
         app:cardBackgroundColor="#40FFFFFF"
         app:cardCornerRadius="5dp"
         app:cardElevation="1dp"
@@ -40,6 +40,15 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
+            <AutoCompleteTextView
+                android:id="@+id/etSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/hint"
+                android:imeOptions="actionDone"
+                android:text="@string/etSearch" />
+
             <ImageButton
                 android:id="@+id/btnSearch"
                 android:layout_width="7dp"
@@ -47,23 +56,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
+                android:contentDescription="@string/desc"
                 app:srcCompat="@android:drawable/ic_menu_search" />
-
-            <EditText
-                android:id="@+id/etSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:autofillHints=""
-                android:backgroundTint="#FFFFFF"
-                android:ems="10"
-                android:focusedByDefault="false"
-                android:gravity="start"
-                android:hint="Hanoi"
-                android:inputType="textPersonName"
-                android:textAlignment="viewStart"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -76,7 +70,7 @@
         android:layout_below="@id/searchContainer"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:elevation="4dp"
+        app:elevation="4dp"
         android:visibility="visible"
         app:cardBackgroundColor="#CCFFFFFF"
         app:cardCornerRadius="20dp">
@@ -175,7 +169,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Date"
+                android:text="@string/txtDate"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
@@ -190,7 +184,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:text="TODAY"
+                android:text="@string/txtToday"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
@@ -204,14 +198,16 @@
         <LinearLayout
             android:id="@+id/descriptionContainer"
             android:layout_width="match_parent"
-            android:layout_height="94dp"
+            android:layout_height="0dp"
             android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/weatherIcon"
                 android:layout_width="233dp"
                 android:layout_height="67dp"
-                android:layout_weight="1" />
+                android:contentDescription="@string/desc"
+                android:layout_weight="1"
+                tools:ignore="NestedWeights"/>
 
             <LinearLayout
                 android:id="@+id/desDetail"
@@ -224,7 +220,7 @@
                     android:id="@+id/textView7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Description:"
+                    android:text="@string/textView7"
                     android:textColor="#000000"
                     android:textStyle="bold" />
 
@@ -232,7 +228,6 @@
                     android:id="@+id/txtDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
                     android:textStyle="bold|italic" />
 
             </LinearLayout>
@@ -246,8 +241,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/detailContainer"
-        android:gravity="center"
         android:layout_marginTop="20dp"
+        android:gravity="center"
         android:orientation="vertical">
 
         <LinearLayout
@@ -268,7 +263,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Sunrise"
+                    android:text="@string/textView12"
                     android:textColor="#000000"
                     android:textStyle="bold" />
 
@@ -276,6 +271,7 @@
                     android:id="@+id/sunriseImg"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:contentDescription="@string/desc"
                     app:srcCompat="@drawable/ic_launcher_foreground"
                     tools:ignore="VectorDrawableCompat" />
 
@@ -304,7 +300,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Sunset"
+                    android:text="@string/textView14"
                     android:textColor="#000000"
                     android:textStyle="bold" />
 
@@ -312,6 +308,7 @@
                     android:id="@+id/sunsetImg"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:contentDescription="@string/desc"
                     app:srcCompat="@drawable/ic_launcher_foreground"
                     tools:ignore="VectorDrawableCompat" />
 
@@ -340,7 +337,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Pressure"
+                    android:text="@string/textView16"
                     android:textColor="#000000"
                     android:textStyle="bold" />
 
@@ -348,6 +345,7 @@
                     android:id="@+id/pressureImg"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:contentDescription="@string/desc"
                     app:srcCompat="@drawable/ic_launcher_foreground"
                     tools:ignore="VectorDrawableCompat" />
 
@@ -380,7 +378,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Wind"
+                    android:text="@string/textView18"
                     android:textColor="#000000"
                     android:textStyle="bold" />
 
@@ -388,6 +386,7 @@
                     android:id="@+id/windImg"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:contentDescription="@string/desc"
                     app:srcCompat="@drawable/ic_launcher_foreground"
                     tools:ignore="VectorDrawableCompat" />
 
@@ -416,7 +415,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Humidity"
+                    android:text="@string/Humidity"
                     android:textColor="#000000"
                     android:textStyle="bold" />
 
@@ -424,6 +423,7 @@
                     android:id="@+id/humidityImg"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:contentDescription="@string/desc"
                     app:srcCompat="@drawable/ic_launcher_foreground"
                     tools:ignore="VectorDrawableCompat" />
 
@@ -453,7 +453,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Feels Like"
+                    android:text="@string/textView22"
                     android:textColor="#000000"
                     android:textStyle="bold" />
 
@@ -461,6 +461,7 @@
                     android:id="@+id/feelImg"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:contentDescription="@string/desc"
                     app:srcCompat="@drawable/ic_launcher_foreground"
                     tools:ignore="VectorDrawableCompat" />
 

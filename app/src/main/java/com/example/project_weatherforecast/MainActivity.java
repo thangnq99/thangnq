@@ -5,24 +5,50 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.inputmethodservice.Keyboard;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.lang.reflect.Array;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.lang.reflect.Type;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
      ImageView image, sunSetImg, sunRiseImg, windImg, pressureImg, humidityImg, feelImg;
      ImageButton btnSearch;
-     EditText etSearch;
+     AutoCompleteTextView etSearch;
      View mainView;
      Button btDayOnWeek;
      String icons;
@@ -42,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+     //
         ActionBar actionBar= getSupportActionBar();
         actionBar.hide();
 
@@ -80,18 +106,45 @@ public class MainActivity extends AppCompatActivity {
         btnSearch = findViewById(R.id.btnSearch);
         etSearch = findViewById(R.id.etSearch);
 
+        List<String> ArrayCity = ArrayCity();
+        String [] listCity = new String[ArrayCity.size()];
+        ArrayCity.toArray(listCity);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ArrayCity);
+        etSearch.setAdapter(adapter);
+
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InputMethodManager inputMethodManager= (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getRootView().getWindowToken(),0);
+//                InputMethodManager inputMethodManager= (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+//                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getRootView().getWindowToken(),0);
                 city = String.valueOf(etSearch.getText());
                 new weatherTask().execute();
                 mainView.requestFocus();
+                hideKeyboard(MainActivity.this);
             }
         });
 
-        btDayOnWeek = findViewById(R.id.btDayOneWeek);
+        etSearch.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(event.getAction() == KeyEvent.ACTION_DOWN){
+                    switch (keyCode){
+                        case KeyEvent.KEYCODE_DPAD_CENTER:
+                        case KeyEvent.KEYCODE_ENTER:
+                            city = String.valueOf(etSearch.getText());
+                            new weatherTask().execute();
+                            mainView.requestFocus();
+                            hideKeyboard(MainActivity.this);
+                            return true;
+                        default:
+                            break;
+                    }
+                }
+                return false;
+            }
+        });
+       btDayOnWeek = findViewById(R.id.btDayOneWeek);
         btDayOnWeek.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +155,49 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public List<String> ArrayCity(){
+        List<String> listCity = new ArrayList<>();
+        try {
+            JSONArray jsonArray = new JSONArray(loadJsonFromAsset());
+            for (int i = 0; i < jsonArray.length() ; i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String name = jsonObject.getString("name");
+                listCity.add(name);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return listCity;
+    }
+
+    public String loadJsonFromAsset(){
+        String json = "";
+        try {
+            InputStream is = getAssets().open("cities.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
     }
 
     class weatherTask extends AsyncTask<String, Void, String>{
