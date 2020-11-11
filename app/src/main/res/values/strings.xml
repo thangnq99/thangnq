@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Project_WeatherForecast</string>
+
+    <string name="dayOneWeek">Day On Week</string>
+
     <string name="etSearch">Hanoi</string>
     <string name="txtDate">Date</string>
     <string name="txtToday">TODAY</string>
@@ -13,4 +16,5 @@
     <string name="Humidity">Humidity</string>
     <string name="hint">Enter city</string>
     <string name="desc"></string>
+
 </resources>
