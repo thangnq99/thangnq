@@ -1,7 +1,7 @@
 package com.example.project_weatherforecast;
 
 import android.content.Intent;
-import android.icu.text.SimpleDateFormat;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +25,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -38,11 +40,13 @@ public class DayOneWeek extends AppCompatActivity {
     ArrayList<Custom> arrayWeather;
     String icon2 = "01d";
     LinearLayout linearLayout;
+    String API = "53fbf527d52d4d773e828243b90c1f8e";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day_one_week);
         linearLayout = findViewById(R.id.lLayout);
+        getSupportActionBar().hide();
         Mapping();
         Intent intent = getIntent();
         String city = intent.getStringExtra("Name");
@@ -50,11 +54,13 @@ public class DayOneWeek extends AppCompatActivity {
         Log.d("KetQua","Du lieu chuyen qua" + city);
         if(city.equals("")) {
             City = "Hanoi";
-            GetDayOnWeek(City);
+//            GetDayOnWeek(City);
+            new weather7DayTask().execute();
             setImage(icon2);
         }else {
             City = city;
-            GetDayOnWeek(City);
+//            GetDayOnWeek(City);
+            new weather7DayTask().execute();
             setImage(icon2);
         }
         imageBack.setOnClickListener(new View.OnClickListener() {
@@ -74,60 +80,109 @@ public class DayOneWeek extends AppCompatActivity {
         listView.setAdapter(customAdapter);
     }
 
-    private void GetDayOnWeek(String data) {
-        String url = "http://api.openweathermap.org/data/2.5/forecast/daily?q="+data+"&units=metric&cnt=7&appid=53fbf527d52d4d773e828243b90c1f8e";
-        RequestQueue requestQueue = Volley.newRequestQueue(DayOneWeek.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
+//    private void GetDayOnWeek(String data) {
+//        String url = "http://api.openweathermap.org/data/2.5/forecast/daily?q="+data+"&units=metric&cnt=7&appid=53fbf527d52d4d773e828243b90c1f8e";
+//        RequestQueue requestQueue = Volley.newRequestQueue(DayOneWeek.this);
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+//                new Response.Listener<String>() {
+//
+//                    @RequiresApi(api = Build.VERSION_CODES.N)
+//                    @Override
+//                    public void onResponse(String response) {
+//                        try {
+//                            JSONObject jsonObject = new JSONObject(response);
+//                            JSONObject jsonObjectCity = jsonObject.getJSONObject("city");
+//                            String name = jsonObjectCity.getString("name");
+//                            txtName.setText(name);
+//
+//                            JSONArray jsonArrayList = jsonObject.getJSONArray("list");
+//                            for (int i = 0; i < jsonArrayList.length(); i++) {
+//                                JSONObject jsonObjectList = jsonArrayList.getJSONObject(i);
+//                                String day = jsonObjectList.getString("dt");
+//                                long l = Long.valueOf(day);
+//                                Date date = new Date(l*1000L);
+////                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy-MM-dd");
+//                                String Day = new SimpleDateFormat("E yyyy-MM-dd", Locale.ENGLISH).format(date);
+//
+//                                JSONObject jsonObjectTemp = jsonObjectList.getJSONObject("temp");
+//                                String max = jsonObjectTemp.getString("max");
+//                                String min = jsonObjectTemp.getString("min");
+//
+//                                Double a = Double.valueOf(max);
+//                                Double b = Double.valueOf(min);
+//
+//                                String MaxC = String.valueOf(a.intValue());
+//                                String MinC = String.valueOf(b.intValue());
+//
+//                                JSONArray jsonArrayWeather = jsonObjectList.getJSONArray("weather");
+//                                JSONObject jsonObjectWeather = jsonArrayWeather.getJSONObject(0);
+//                                String status = jsonObjectWeather.getString("description");
+//                                String icon = jsonObjectWeather.getString("icon");
+//                                arrayWeather.add(new Custom(Day,status,icon,MaxC,MinC));
+//                            }
+//                            customAdapter.notifyDataSetChanged();
+//
+//                        }catch (JSONException e) {
+//
+//                        }
+//
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        requestQueue.add(stringRequest);
+//    }
 
-                    @RequiresApi(api = Build.VERSION_CODES.N)
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            JSONObject jsonObjectCity = jsonObject.getJSONObject("city");
-                            String name = jsonObjectCity.getString("name");
-                            txtName.setText(name);
+    class weather7DayTask extends AsyncTask<String, Void, String> {
 
-                            JSONArray jsonArrayList = jsonObject.getJSONArray("list");
-                            for (int i = 0; i < jsonArrayList.length(); i++) {
-                                JSONObject jsonObjectList = jsonArrayList.getJSONObject(i);
-                                String day = jsonObjectList.getString("dt");
-                                long l = Long.valueOf(day);
-                                Date date = new Date(l*1000L);
+        @Override
+        protected String doInBackground(String... strings) {
+            return HttpRequest.excuteGet("http://api.openweathermap.org/data/2.5/forecast/daily?q="+City+"&units=metric&cnt=7&appid=53fbf527d52d4d773e828243b90c1f8e");
+        }
+
+        @Override
+        protected void onPostExecute(String response) {
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                JSONObject jsonObjectCity = jsonObject.getJSONObject("city");
+                String name = jsonObjectCity.getString("name");
+                txtName.setText(name);
+
+                JSONArray jsonArrayList = jsonObject.getJSONArray("list");
+                for (int i = 0; i < jsonArrayList.length(); i++) {
+                    JSONObject jsonObjectList = jsonArrayList.getJSONObject(i);
+                    String day = jsonObjectList.getString("dt");
+                    long l = Long.valueOf(day);
+                    Date date = new Date(l*1000L);
 //                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy-MM-dd");
-                                String Day = new SimpleDateFormat("E yyyy-MM-dd", Locale.ENGLISH).format(date);
+                    String Day = new SimpleDateFormat("E dd/MM/yyyy", Locale.ENGLISH).format(date);
 
-                                JSONObject jsonObjectTemp = jsonObjectList.getJSONObject("temp");
-                                String max = jsonObjectTemp.getString("max");
-                                String min = jsonObjectTemp.getString("min");
+                    JSONObject jsonObjectTemp = jsonObjectList.getJSONObject("temp");
+                    String max = jsonObjectTemp.getString("max");
+                    String min = jsonObjectTemp.getString("min");
 
-                                Double a = Double.valueOf(max);
-                                Double b = Double.valueOf(min);
+                    Double a = Double.valueOf(max);
+                    Double b = Double.valueOf(min);
 
-                                String MaxC = String.valueOf(a.intValue());
-                                String MinC = String.valueOf(b.intValue());
+                    String MaxC = String.valueOf(a.intValue());
+                    String MinC = String.valueOf(b.intValue());
 
-                                JSONArray jsonArrayWeather = jsonObjectList.getJSONArray("weather");
-                                JSONObject jsonObjectWeather = jsonArrayWeather.getJSONObject(0);
-                                String status = jsonObjectWeather.getString("description");
-                                String icon = jsonObjectWeather.getString("icon");
-                                arrayWeather.add(new Custom(Day,status,icon,MaxC,MinC));
-                            }
-                            customAdapter.notifyDataSetChanged();
-
-                        }catch (JSONException e) {
-
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
+                    JSONArray jsonArrayWeather = jsonObjectList.getJSONArray("weather");
+                    JSONObject jsonObjectWeather = jsonArrayWeather.getJSONObject(0);
+                    String status = jsonObjectWeather.getString("description");
+                    String icon = jsonObjectWeather.getString("icon");
+                    arrayWeather.add(new Custom(Day,status,icon,MaxC,MinC));
+                }
+                customAdapter.notifyDataSetChanged();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        });
-        requestQueue.add(stringRequest);
+
+
+        }
     }
     private void setImage(final String value){
                 switch (value){

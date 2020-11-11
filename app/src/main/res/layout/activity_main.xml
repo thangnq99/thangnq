@@ -114,7 +114,7 @@
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display4"
                 android:textColor="#000000"
-                android:textSize="90sp"
+                android:textSize="80sp"
                 android:textStyle="bold"
                 tools:text="35" />
 
