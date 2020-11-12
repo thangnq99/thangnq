@@ -191,82 +191,82 @@ public class DayOneWeek extends AppCompatActivity {
 
         }
     }
-    private void setImage(final String value, int i){
-                switch (value){
-                    case "01d":
-                        listView.setBackgroundResource(R.drawable.cloudday);
-                        break;
-                    case "01n":
-
-//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
-                        listView.setBackgroundResource(R.drawable.cloudnight);
-
-                        break;
-                    case "02d":
-//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudday));
-                        listView.setBackgroundResource(R.drawable.cloudday);
-
-                        break;
-                    case "02n":
-//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
-                        listView.setBackgroundResource(R.drawable.cloudnight);
-                        break;
-                    case "03d":
-//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.scatteredcloud));
-                        listView.setBackgroundResource(R.drawable.scatteredcloud);
-                        break;
-                    case "03n":
-//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
-                        listView.setBackgroundResource(R.drawable.cloudnight);
-                        break;
-                    case "04d":
-//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.brokenclouds));
-                        listView.setBackgroundResource(R.drawable.brokenclouds);
-                        break;
-                    case "04n":
-//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
-                        listView.setBackgroundResource(R.drawable.cloudnight);
-                        break;
-                    case "09d":
-//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.showerrain));
-                        listView.setBackgroundResource(R.drawable.showerrain);
-                        break;
-                    case "09n":
-//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.showerrain));
-                        listView.setBackgroundResource(R.drawable.showerrain);
-                        break;
-                    case "10d":
-//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.rainday));
-                        listView.setBackgroundResource(R.drawable.rainday);
-                        break;
-                    case "10n":
-//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.rainnight));
-                        listView.setBackgroundResource(R.drawable.rainnight);
-                        break;
-                    case "11d":
-//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.thunderstorm));
-                        listView.setBackgroundResource(R.drawable.thunderstorm);
-                        break;
-                    case "11n":
-//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.thunderstorm));
-                        listView.setBackgroundResource(R.drawable.thunderstorm);
-                        break;
-                    case "13d":
-//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.snowday));
-                        listView.setBackgroundResource(R.drawable.snowday);
-                        break;
-                    case "13n":
-//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.snownight));
-                        listView.setBackgroundResource(R.drawable.snownight);
-                        break;
-                    case "50d":
-//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.mistday));
-                        listView.setBackgroundResource(R.drawable.mistday);
-                        break;
-                    case "50n":
-//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.mistnight));
-                        listView.setBackgroundResource(R.drawable.mistnight);
-                        break;
-                }
-    }
+//    private void setImage(final String value, int i){
+//                switch (value){
+//                    case "01d":
+//                        listView.setBackgroundResource(R.drawable.cloudday);
+//                        break;
+//                    case "01n":
+//
+////                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
+//                        listView.setBackgroundResource(R.drawable.cloudnight);
+//
+//                        break;
+//                    case "02d":
+////                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudday));
+//                        listView.setBackgroundResource(R.drawable.cloudday);
+//
+//                        break;
+//                    case "02n":
+////                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
+//                        listView.setBackgroundResource(R.drawable.cloudnight);
+//                        break;
+//                    case "03d":
+////                        linearLayout.setBackground(getResources().getDrawable(R.drawable.scatteredcloud));
+//                        listView.setBackgroundResource(R.drawable.scatteredcloud);
+//                        break;
+//                    case "03n":
+////                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
+//                        listView.setBackgroundResource(R.drawable.cloudnight);
+//                        break;
+//                    case "04d":
+////                        linearLayout.setBackground(getResources().getDrawable(R.drawable.brokenclouds));
+//                        listView.setBackgroundResource(R.drawable.brokenclouds);
+//                        break;
+//                    case "04n":
+////                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
+//                        listView.setBackgroundResource(R.drawable.cloudnight);
+//                        break;
+//                    case "09d":
+////                        linearLayout.setBackground(getResources().getDrawable(R.drawable.showerrain));
+//                        listView.setBackgroundResource(R.drawable.showerrain);
+//                        break;
+//                    case "09n":
+////                        linearLayout.setBackground(getResources().getDrawable(R.drawable.showerrain));
+//                        listView.setBackgroundResource(R.drawable.showerrain);
+//                        break;
+//                    case "10d":
+////                        linearLayout.setBackground(getResources().getDrawable(R.drawable.rainday));
+//                        listView.setBackgroundResource(R.drawable.rainday);
+//                        break;
+//                    case "10n":
+////                        linearLayout.setBackground(getResources().getDrawable(R.drawable.rainnight));
+//                        listView.setBackgroundResource(R.drawable.rainnight);
+//                        break;
+//                    case "11d":
+////                        linearLayout.setBackground(getResources().getDrawable(R.drawable.thunderstorm));
+//                        listView.setBackgroundResource(R.drawable.thunderstorm);
+//                        break;
+//                    case "11n":
+////                        linearLayout.setBackground(getResources().getDrawable(R.drawable.thunderstorm));
+//                        listView.setBackgroundResource(R.drawable.thunderstorm);
+//                        break;
+//                    case "13d":
+////                        linearLayout.setBackground(getResources().getDrawable(R.drawable.snowday));
+//                        listView.setBackgroundResource(R.drawable.snowday);
+//                        break;
+//                    case "13n":
+////                        linearLayout.setBackground(getResources().getDrawable(R.drawable.snownight));
+//                        listView.setBackgroundResource(R.drawable.snownight);
+//                        break;
+//                    case "50d":
+////                        linearLayout.setBackground(getResources().getDrawable(R.drawable.mistday));
+//                        listView.setBackgroundResource(R.drawable.mistday);
+//                        break;
+//                    case "50n":
+////                        linearLayout.setBackground(getResources().getDrawable(R.drawable.mistnight));
+//                        listView.setBackgroundResource(R.drawable.mistnight);
+//                        break;
+//                }
+//    }
 }
