@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -47,12 +48,109 @@ public class CustomAdapter extends BaseAdapter {
         TextView textMaxTemp = (TextView) convertView.findViewById(R.id.txtTempMax);
         TextView textMinTemp = (TextView) convertView.findViewById(R.id.txtTempMin);
         ImageView imageStatus = (ImageView) convertView.findViewById(R.id.imgType);
-
+        LinearLayout linearLayout = convertView.findViewById(R.id.line2);
+//        linearLayout.setBackground(context.getResources().getDrawable(R.drawable.cloudnight));
+        LinearLayout linearLayout1 = convertView.findViewById(R.id.line3);
         textDay.setText(custom.Day);
         textStatus.setText(custom.Status);
         textMaxTemp.setText(custom.MaxTemp + " °C");
         textMinTemp.setText(custom.MinTemp + " °C");
         Picasso.with(context).load("http://openweathermap.org/img/w/"+custom.Image+".png").into(imageStatus);
+        switch (custom.Image){
+            case "01d":
+                linearLayout.setBackgroundResource(R.drawable.cloudday);
+//                linearLayout1.setBackgroundResource(R.drawable.cloudday);
+                break;
+            case "01n":
+
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
+                linearLayout.setBackgroundResource(R.drawable.cloudnight);
+//                linearLayout1.setBackgroundResource(R.drawable.cloudnight);
+
+                break;
+            case "02d":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudday));
+                linearLayout.setBackgroundResource(R.drawable.cloudday);
+//                linearLayout1.setBackgroundResource(R.drawable.cloudday);
+
+                break;
+            case "02n":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
+                linearLayout.setBackgroundResource(R.drawable.cloudnight);
+//                linearLayout1.setBackgroundResource(R.drawable.cloudnight);
+                break;
+            case "03d":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.scatteredcloud));
+                linearLayout.setBackgroundResource(R.drawable.scatteredcloud);
+//                linearLayout1.setBackgroundResource(R.drawable.scatteredcloud);
+                break;
+            case "03n":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
+                linearLayout.setBackgroundResource(R.drawable.cloudnight);
+//                linearLayout1.setBackgroundResource(R.drawable.cloudnight);
+                break;
+            case "04d":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.brokenclouds));
+                linearLayout.setBackgroundResource(R.drawable.brokenclouds);
+//                linearLayout1.setBackgroundResource(R.drawable.brokenclouds);
+                break;
+            case "04n":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
+                linearLayout.setBackgroundResource(R.drawable.cloudnight);
+//                linearLayout1.setBackgroundResource(R.drawable.cloudnight);
+                break;
+            case "09d":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.showerrain));
+                linearLayout.setBackgroundResource(R.drawable.showerrain);
+//                linearLayout1.setBackgroundResource(R.drawable.showerrain);
+                break;
+            case "09n":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.showerrain));
+                linearLayout.setBackgroundResource(R.drawable.showerrain);
+//                linearLayout1.setBackgroundResource(R.drawable.showerrain);
+                break;
+            case "10d":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.rainday));
+                linearLayout.setBackgroundResource(R.drawable.rainday);
+//                linearLayout1.setBackgroundResource(R.drawable.rainday);
+                break;
+            case "10n":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.rainnight));
+                linearLayout.setBackgroundResource(R.drawable.rainnight);
+//                linearLayout1.setBackgroundResource(R.drawable.rainnight);
+                break;
+            case "11d":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.thunderstorm));
+                linearLayout.setBackgroundResource(R.drawable.thunderstorm);
+//                linearLayout1.setBackgroundResource(R.drawable.thunderstorm);
+                break;
+            case "11n":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.thunderstorm));
+                linearLayout.setBackgroundResource(R.drawable.thunderstorm);
+//                linearLayout1.setBackgroundResource(R.drawable.thunderstorm);
+                break;
+            case "13d":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.snowday));
+                linearLayout.setBackgroundResource(R.drawable.snowday);
+//                linearLayout1.setBackgroundResource(R.drawable.snowday);
+                break;
+            case "13n":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.snownight));
+                linearLayout.setBackgroundResource(R.drawable.snownight);
+//                linearLayout1.setBackgroundResource(R.drawable.snownight);
+                break;
+            case "50d":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.mistday));
+                linearLayout.setBackgroundResource(R.drawable.mistday);
+//                linearLayout1.setBackgroundResource(R.drawable.mistday);
+                break;
+            case "50n":
+//                        linearLayout.setBackground(getResources().getDrawable(R.drawable.mistnight));
+                linearLayout.setBackgroundResource(R.drawable.mistnight);
+//                linearLayout1.setBackgroundResource(R.drawable.mistnight);
+                break;
+        }
         return convertView;
     }
+
 }

@@ -1,11 +1,13 @@
 package com.example.project_weatherforecast;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -54,14 +56,15 @@ public class DayOneWeek extends AppCompatActivity {
         Log.d("KetQua","Du lieu chuyen qua" + city);
         if(city.equals("")) {
             City = "Hanoi";
+            listView.getChildAt(0).setBackgroundResource(R.drawable.rainday);
 //            GetDayOnWeek(City);
             new weather7DayTask().execute();
-            setImage(icon2);
+//            setImage(icon2);
         }else {
             City = city;
-//            GetDayOnWeek(City);
+//       tx    GetDayOnWeek(City);
             new weather7DayTask().execute();
-            setImage(icon2);
+//            setImage(icon2);
         }
         imageBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +72,7 @@ public class DayOneWeek extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        
     }
 
     private void Mapping() {
@@ -149,7 +153,8 @@ public class DayOneWeek extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(response);
                 JSONObject jsonObjectCity = jsonObject.getJSONObject("city");
                 String name = jsonObjectCity.getString("name");
-                txtName.setText(name);
+                txtName.setText("City: " +name +","+jsonObjectCity.getString("country"));
+//                txtName.setText("City: " +name);
 
                 JSONArray jsonArrayList = jsonObject.getJSONArray("list");
                 for (int i = 0; i < jsonArrayList.length(); i++) {
@@ -175,6 +180,8 @@ public class DayOneWeek extends AppCompatActivity {
                     String status = jsonObjectWeather.getString("description");
                     String icon = jsonObjectWeather.getString("icon");
                     arrayWeather.add(new Custom(Day,status,icon,MaxC,MinC));
+//                    listView.getChildAt(i).setBackgroundResource(R.drawable.rainday);
+//                    setImage(icon, i);
                 }
                 customAdapter.notifyDataSetChanged();
             } catch (Exception e) {
@@ -184,81 +191,81 @@ public class DayOneWeek extends AppCompatActivity {
 
         }
     }
-    private void setImage(final String value){
+    private void setImage(final String value, int i){
                 switch (value){
                     case "01d":
-
-                        linearLayout.setBackgroundResource(R.drawable.cloudday);
+                        listView.setBackgroundResource(R.drawable.cloudday);
                         break;
                     case "01n":
 
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
-                        linearLayout.setBackgroundResource(R.drawable.cloudnight);
+                        listView.setBackgroundResource(R.drawable.cloudnight);
+
                         break;
                     case "02d":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudday));
-                        linearLayout.setBackgroundResource(R.drawable.cloudday);
+                        listView.setBackgroundResource(R.drawable.cloudday);
 
                         break;
                     case "02n":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
-                        linearLayout.setBackgroundResource(R.drawable.cloudnight);
+                        listView.setBackgroundResource(R.drawable.cloudnight);
                         break;
                     case "03d":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.scatteredcloud));
-                        linearLayout.setBackgroundResource(R.drawable.scatteredcloud);
+                        listView.setBackgroundResource(R.drawable.scatteredcloud);
                         break;
                     case "03n":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
-                        linearLayout.setBackgroundResource(R.drawable.cloudnight);
+                        listView.setBackgroundResource(R.drawable.cloudnight);
                         break;
                     case "04d":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.brokenclouds));
-                        linearLayout.setBackgroundResource(R.drawable.brokenclouds);
+                        listView.setBackgroundResource(R.drawable.brokenclouds);
                         break;
                     case "04n":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
-                        linearLayout.setBackgroundResource(R.drawable.cloudnight);
+                        listView.setBackgroundResource(R.drawable.cloudnight);
                         break;
                     case "09d":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.showerrain));
-                        linearLayout.setBackgroundResource(R.drawable.showerrain);
+                        listView.setBackgroundResource(R.drawable.showerrain);
                         break;
                     case "09n":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.showerrain));
-                        linearLayout.setBackgroundResource(R.drawable.showerrain);
+                        listView.setBackgroundResource(R.drawable.showerrain);
                         break;
                     case "10d":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.rainday));
-                        linearLayout.setBackgroundResource(R.drawable.rainday);
+                        listView.setBackgroundResource(R.drawable.rainday);
                         break;
                     case "10n":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.rainnight));
-                        linearLayout.setBackgroundResource(R.drawable.rainnight);
+                        listView.setBackgroundResource(R.drawable.rainnight);
                         break;
                     case "11d":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.thunderstorm));
-                        linearLayout.setBackgroundResource(R.drawable.thunderstorm);
+                        listView.setBackgroundResource(R.drawable.thunderstorm);
                         break;
                     case "11n":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.thunderstorm));
-                        linearLayout.setBackgroundResource(R.drawable.thunderstorm);
+                        listView.setBackgroundResource(R.drawable.thunderstorm);
                         break;
                     case "13d":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.snowday));
-                        linearLayout.setBackgroundResource(R.drawable.snowday);
+                        listView.setBackgroundResource(R.drawable.snowday);
                         break;
                     case "13n":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.snownight));
-                        linearLayout.setBackgroundResource(R.drawable.snownight);
+                        listView.setBackgroundResource(R.drawable.snownight);
                         break;
                     case "50d":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.mistday));
-                        linearLayout.setBackgroundResource(R.drawable.mistday);
+                        listView.setBackgroundResource(R.drawable.mistday);
                         break;
                     case "50n":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.mistnight));
-                        linearLayout.setBackgroundResource(R.drawable.mistnight);
+                        listView.setBackgroundResource(R.drawable.mistnight);
                         break;
                 }
     }
