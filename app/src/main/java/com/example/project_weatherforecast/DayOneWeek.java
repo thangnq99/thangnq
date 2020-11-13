@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -13,7 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -35,7 +39,6 @@ import java.util.Locale;
 
 public class DayOneWeek extends AppCompatActivity {
     String City = "";
-    ImageView imageBack;
     TextView txtName;
     ListView listView;
     CustomAdapter customAdapter;
@@ -48,7 +51,9 @@ public class DayOneWeek extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day_one_week);
         linearLayout = findViewById(R.id.lLayout);
-        getSupportActionBar().hide();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().hide();
         Mapping();
         Intent intent = getIntent();
         String city = intent.getStringExtra("Name");
@@ -66,17 +71,24 @@ public class DayOneWeek extends AppCompatActivity {
             new weather7DayTask().execute();
 //            setImage(icon2);
         }
-        imageBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
                 onBackPressed();
-            }
-        });
-        
+                return true;
+
+            default:break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void Mapping() {
-        imageBack = (ImageView) findViewById(R.id.imgBack);
         txtName = (TextView) findViewById(R.id.nameCity);
         listView = (ListView) findViewById(R.id.listView);
         arrayWeather = new ArrayList<Custom>();

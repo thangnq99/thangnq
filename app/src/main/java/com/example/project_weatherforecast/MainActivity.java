@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
 //     String API = "5f0e7bb0ea868b77d281b07c046f565c";
     String API = "53fbf527d52d4d773e828243b90c1f8e";
-     String city = "Hanoi";
+     String city = "HaNoi";
      TextView address, status, recentTemp, tempMax, tempMin, date, description, sunSet, sunRise,
                     windSpeed, pressure, humidity, feelsLike;
 
