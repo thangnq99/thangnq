@@ -17,6 +17,8 @@
         android:textSize="25dp"
         android:textStyle="normal|bold" />
 
+
+
     <ListView
 
         android:id="@+id/listView"

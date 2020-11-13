@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 public class CustomAdapter extends BaseAdapter {
     Context context;
     ArrayList<Custom> arrayList;
+
 
     public CustomAdapter(Context context, ArrayList<Custom> arrayList) {
         this.context = context;
@@ -43,7 +46,6 @@ public class CustomAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.listviewline,null);
         Custom custom = arrayList.get(position);
-
         TextView textDay = (TextView) convertView.findViewById(R.id.textViewDate);
         TextView textStatus = (TextView) convertView.findViewById(R.id.type);
         TextView textMaxTemp = (TextView) convertView.findViewById(R.id.txtTempMax);
@@ -57,6 +59,19 @@ public class CustomAdapter extends BaseAdapter {
         textMaxTemp.setText(custom.MaxTemp + " °C");
         textMinTemp.setText(custom.MinTemp + " °C");
         Picasso.with(context).load("http://openweathermap.org/img/w/"+custom.Image+".png").into(imageStatus);
+        Animation animation = null;
+        animation = AnimationUtils.loadAnimation(context, R.anim.slide_left);
+        convertView.startAnimation(animation);
+        switch (DayOneWeek.weatherItem) {
+            case R.id.slide_left:
+                animation = AnimationUtils.loadAnimation(context, R.anim.slide_left);
+                convertView.startAnimation(animation);
+                break;
+            case R.id.slide_up:
+                animation = AnimationUtils.loadAnimation(context, R.anim.slide_up);
+                convertView.startAnimation(animation);
+                break;
+        }
         switch (custom.Image){
             case "01d":
                 linearLayout.setBackgroundResource(R.drawable.cloudday);
@@ -155,6 +170,7 @@ public class CustomAdapter extends BaseAdapter {
 //                linearLayout1.setBackgroundResource(R.drawable.mistnight);
                 break;
         }
+
         return convertView;
     }
 
