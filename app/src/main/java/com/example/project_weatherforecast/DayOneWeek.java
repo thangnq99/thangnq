@@ -129,9 +129,8 @@ public class DayOneWeek extends AppCompatActivity {
 
                     Double a = Double.valueOf(max);
                     Double b = Double.valueOf(min);
-
-                    String MaxC = String.valueOf(a.intValue());
-                    String MinC = String.valueOf(b.intValue());
+                    String MaxC = String.valueOf(b.intValue());
+                    String MinC = String.valueOf(a.intValue());
 
                     JSONArray jsonArrayWeather = jsonObjectList.getJSONArray("weather");
                     JSONObject jsonObjectWeather = jsonArrayWeather.getJSONObject(0);
