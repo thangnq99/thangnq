@@ -1,9 +1,12 @@
 package com.example.project_weatherforecast;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,6 +19,7 @@ import java.util.ArrayList;
 public class CustomAdapter extends BaseAdapter {
     Context context;
     ArrayList<Custom> arrayList;
+
 
     public CustomAdapter(Context context, ArrayList<Custom> arrayList) {
         this.context = context;
@@ -42,13 +46,12 @@ public class CustomAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.listviewline,null);
         Custom custom = arrayList.get(position);
-
         TextView textDay = (TextView) convertView.findViewById(R.id.textViewDate);
         TextView textStatus = (TextView) convertView.findViewById(R.id.type);
         TextView textMaxTemp = (TextView) convertView.findViewById(R.id.txtTempMax);
         TextView textMinTemp = (TextView) convertView.findViewById(R.id.txtTempMin);
         ImageView imageStatus = (ImageView) convertView.findViewById(R.id.imgType);
-        LinearLayout linearLayout = convertView.findViewById(R.id.line2);
+        LinearLayout linearLayout = convertView.findViewById(R.id.line);
 //        linearLayout.setBackground(context.getResources().getDrawable(R.drawable.cloudnight));
         LinearLayout linearLayout1 = convertView.findViewById(R.id.line3);
         textDay.setText(custom.Day);
@@ -56,6 +59,19 @@ public class CustomAdapter extends BaseAdapter {
         textMaxTemp.setText(custom.MaxTemp + " °C");
         textMinTemp.setText(custom.MinTemp + " °C");
         Picasso.with(context).load("http://openweathermap.org/img/w/"+custom.Image+".png").into(imageStatus);
+        Animation animation = null;
+        animation = AnimationUtils.loadAnimation(context, R.anim.slide_left);
+        convertView.startAnimation(animation);
+        switch (DayOneWeek.weatherItem) {
+            case R.id.slide_left:
+                animation = AnimationUtils.loadAnimation(context, R.anim.slide_left);
+                convertView.startAnimation(animation);
+                break;
+            case R.id.slide_up:
+                animation = AnimationUtils.loadAnimation(context, R.anim.slide_up);
+                convertView.startAnimation(animation);
+                break;
+        }
         switch (custom.Image){
             case "01d":
                 linearLayout.setBackgroundResource(R.drawable.cloudday);
@@ -66,23 +82,26 @@ public class CustomAdapter extends BaseAdapter {
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
                 linearLayout.setBackgroundResource(R.drawable.cloudnight);
 //                linearLayout1.setBackgroundResource(R.drawable.cloudnight);
+//                linearLayout.setBackgroundColor(Color.RED);
 
                 break;
             case "02d":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudday));
                 linearLayout.setBackgroundResource(R.drawable.cloudday);
 //                linearLayout1.setBackgroundResource(R.drawable.cloudday);
-
+//                linearLayout.setBackgroundColor(Color.RED);
                 break;
             case "02n":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
                 linearLayout.setBackgroundResource(R.drawable.cloudnight);
 //                linearLayout1.setBackgroundResource(R.drawable.cloudnight);
+//                linearLayout.setBackgroundColor(Color.RED);
                 break;
             case "03d":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.scatteredcloud));
                 linearLayout.setBackgroundResource(R.drawable.scatteredcloud);
 //                linearLayout1.setBackgroundResource(R.drawable.scatteredcloud);
+//                linearLayout.setBackgroundColor(Color.RED);
                 break;
             case "03n":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.cloudnight));
@@ -103,6 +122,7 @@ public class CustomAdapter extends BaseAdapter {
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.showerrain));
                 linearLayout.setBackgroundResource(R.drawable.showerrain);
 //                linearLayout1.setBackgroundResource(R.drawable.showerrain);
+//                linearLayout.setBackgroundColor(Color.RED);
                 break;
             case "09n":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.showerrain));
@@ -150,6 +170,7 @@ public class CustomAdapter extends BaseAdapter {
 //                linearLayout1.setBackgroundResource(R.drawable.mistnight);
                 break;
         }
+
         return convertView;
     }
 

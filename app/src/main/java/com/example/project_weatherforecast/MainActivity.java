@@ -1,5 +1,6 @@
 package com.example.project_weatherforecast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +12,8 @@ import android.inputmethodservice.Keyboard;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -26,6 +29,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
 //     String API = "5f0e7bb0ea868b77d281b07c046f565c";
     String API = "53fbf527d52d4d773e828243b90c1f8e";
-     String city = "Hanoi";
+     String city = "HaNoi";
      TextView address, status, recentTemp, tempMax, tempMin, date, description, sunSet, sunRise,
                     windSpeed, pressure, humidity, feelsLike;
 
@@ -64,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
      View mainView;
      Button btDayOnWeek;
      String icons;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
