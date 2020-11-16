@@ -5,8 +5,8 @@
     android:id="@+id/lLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backgroud"
     android:orientation="vertical"
-    android:background="@drawable/blue"
     tools:context=".DayOneWeek">
 
     <TextView
@@ -14,14 +14,108 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="City :    "
-        android:textSize="25dp"
-        android:textStyle="normal|bold" />
+        android:textSize="25dp" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
+        <ImageView
+            android:id="@+id/imgIcon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/textNhietDo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nhiet Do"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgDoAm"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@drawable/iconhumidity" />
+
+            <TextView
+                android:id="@+id/textDoAm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Do Am"
+                android:textSize="25dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgGio"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@drawable/windspeed" />
+
+            <TextView
+                android:id="@+id/textGio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Gio"
+                android:textSize="25dp" />
+        </LinearLayout>
+        Gió
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgMay"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@drawable/c1" />
+
+            <TextView
+                android:id="@+id/texMay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="May"
+                android:textSize="25dp" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <ListView
-
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:thicknessRatio="2"
+        tools:listheader="@layout/activity_day_one_week" />
+
 </LinearLayout>
