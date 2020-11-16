@@ -60,11 +60,11 @@ public class CustomAdapter extends BaseAdapter {
         textMinTemp.setText(custom.MinTemp + " °C");
         Picasso.with(context).load("http://openweathermap.org/img/w/"+custom.Image+".png").into(imageStatus);
         Animation animation = null;
-        animation = AnimationUtils.loadAnimation(context, R.anim.fadein);
+        animation = AnimationUtils.loadAnimation(context, R.anim.slide_left);
         convertView.startAnimation(animation);
         switch (DayOneWeek.weatherItem) {
             case R.id.slide_left:
-                animation = AnimationUtils.loadAnimation(context, R.anim.fadein);
+                animation = AnimationUtils.loadAnimation(context, R.anim.slide_left);
                 convertView.startAnimation(animation);
                 break;
             case R.id.slide_up:
@@ -166,7 +166,7 @@ public class CustomAdapter extends BaseAdapter {
                 break;
             case "50n":
 //                        linearLayout.setBackground(getResources().getDrawable(R.drawable.mistnight));
-                linearLayout.setBackgroundResource(R.drawable.mist);
+                linearLayout.setBackgroundResource(R.drawable.mistnight);
 //                linearLayout1.setBackgroundResource(R.drawable.mistnight);
                 break;
         }
