@@ -26,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +48,7 @@ public class DayOneWeek extends AppCompatActivity {
     LinearLayout linearLayout;
     int index = 0;
     public  static int weatherItem;
+    ImageView imgIcon;
     TextView txtTemp,txtStatus,txtHumidity,txtCloud,txtWind;
     String API = "53fbf527d52d4d773e828243b90c1f8e";
     @Override
@@ -67,6 +69,13 @@ public class DayOneWeek extends AppCompatActivity {
             City = city;
             new weather7DayTask().execute();
         }
+        getOneDayInformation(City,0);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                getOneDayInformation(City,position);
+            }
+        });
     }
 
     @Override
@@ -87,10 +96,82 @@ public class DayOneWeek extends AppCompatActivity {
         weatherItem = item.getItemId();
         return super.onOptionsItemSelected(item);
     }
+    private void getOneDayInformation(String name, final int pos) {
+        String url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + name.trim() + "&appid=c9d49310f8023ee2617a7634de23c2aa&cnt=7&lang=vi&units=metric";
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("ket qua 1 day", response);
+                try {
 
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONObject jsonObjectDay = jsonObject.getJSONObject("city");
+
+
+                    JSONArray jsonArrayList = jsonObject.getJSONArray("list");
+
+
+                    JSONObject jsonObjectList = jsonArrayList.getJSONObject(pos);
+
+                    String ngay = jsonObjectList.getString("dt");
+
+                    long l = Long.valueOf(ngay);
+                    Locale locale = new Locale("vi", "VN");
+                    Date date = new Date(l * 1000L);
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE dd/MM/yyyy", locale);
+                    String Day = simpleDateFormat.format(date);
+
+
+                    JSONObject jsonObjectTemp = jsonObjectList.getJSONObject("temp");
+                    String temp = jsonObjectTemp.getString("day");
+
+
+                    Double a = Double.valueOf(temp);
+                    String daytemp = String.valueOf(a.intValue());
+
+                    txtTemp.setText(daytemp + "°C");
+
+                    String humidity = jsonObjectList.getString("humidity");
+
+                    txtHumidity.setText(humidity + "%");
+
+
+                    String wind = jsonObjectList.getString("speed");
+                    txtWind.setText(wind + "m/s");
+                    String cloud = jsonObjectList.getString("clouds");
+                    txtCloud.setText(cloud + "%");
+
+
+                    JSONArray jsonArrayWeather = jsonObjectList.getJSONArray("weather");
+                    JSONObject jsonObjectWeather = jsonArrayWeather.getJSONObject(0);
+                    String status = jsonObjectWeather.getString("description");
+                    String icon = jsonObjectWeather.getString("icon");
+                    Picasso.with(DayOneWeek.this).load("http://api.openweathermap.org/img/w/" + icon + ".png").into(imgIcon);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+        requestQueue.add(stringRequest);
+
+    }
     private void Mapping() {
-
-        txtStatus = findViewById(R.id.txtStatus);
+        imgIcon = (ImageView) findViewById(R.id.imgIcon);
+        txtTemp = (TextView) findViewById(R.id.textNhietDo);
+        txtHumidity = (TextView) findViewById(R.id.textDoAm);
+        txtCloud = (TextView) findViewById(R.id.texMay);
+        txtWind = (TextView) findViewById(R.id.textGio);
+        txtStatus = (TextView) findViewById(R.id.txtStatus);
         txtName = (TextView) findViewById(R.id.nameCity);
         listView = (ListView) findViewById(R.id.listView);
         arrayWeather = new ArrayList<Custom>();
@@ -102,7 +183,7 @@ public class DayOneWeek extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            return HttpRequest.excuteGet("http://api.openweathermap.org/data/2.5/forecast/daily?q="+City+"&units=metric&cnt=17&appid=53fbf527d52d4d773e828243b90c1f8e");
+            return HttpRequest.excuteGet("http://api.openweathermap.org/data/2.5/forecast/daily?q="+City+"&units=metric&cnt=7&appid=53fbf527d52d4d773e828243b90c1f8e");
         }
 
         @Override

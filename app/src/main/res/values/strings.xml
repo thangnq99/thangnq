@@ -11,7 +11,6 @@
     <string name="textView14">Sunset</string>
     <string name="textView16">Pressure</string>
     <string name="textView18">Wind</string>
-    <string name="textView20">Humidity</string>
     <string name="textView22">Feels Like</string>
     <string name="Humidity">Humidity</string>
     <string name="hint">Enter city</string>
