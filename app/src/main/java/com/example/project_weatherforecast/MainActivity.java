@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
                 setImage(image, icon);
 
                 NumberFormat numberFormat = NumberFormat.getNumberInstance();
-                numberFormat.setMaximumFractionDigits(1);
+                numberFormat.setMaximumFractionDigits(0);
                 String txtTemp = numberFormat.format(main.getDouble("temp")) +"°C";
                 String txtTempMax = numberFormat.format(main.getDouble("temp_max")) +"°C";
                 String txtTempMin = numberFormat.format(main.getDouble("temp_min")) +"°C";
@@ -349,7 +349,7 @@ public class MainActivity extends AppCompatActivity {
                         imageView.setImageDrawable(getResources().getDrawable(R.drawable.i50d));
                         break;
                     case "50n":
-                        mainView.setBackground(getResources().getDrawable(R.drawable.mistnight));
+                        mainView.setBackground(getResources().getDrawable(R.drawable.mist));
                         imageView.setImageDrawable(getResources().getDrawable(R.drawable.i50n));
                         break;
                 }
